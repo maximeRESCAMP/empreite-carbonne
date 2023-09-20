@@ -1,0 +1,33 @@
+<p>carbon-footprint works!</p>
+<p [ngStyle]="{'color':consommationPour100Km>7?'red':consommationPour100Km<4?'blue':''}">La consomation pour 100km est de {{consommationPour100Km|number:'1.2-2'}}L au 100</p>
+<p [ngClass]="{'haute-distance':distanceKm>500,'basse-distance':distanceKm<100}">Le nombre de KM parcourue est de {{distanceKm}}KM</p>
+<p>Et la consomation totale est {{(consommationPour100Km/100*distanceKm)|number:'1.2-2'}}</p>
+<p>L'émission de CO2 dans l'asmothere est de {{quantiteCO2Totale}}</p>
+<div *ngIf="consommationPour100Km>7">
+    <p>Attention, votre consommation est élevée</p>
+</div>
+<div *ngIf="consommationPour100Km<4">
+    <p>Félicitations, votre consommation est faible</p>
+</div>
+<button (click)="ajouter100KM()">Ajouter 100km</button>
+
+<app-carbon-footprint-form></app-carbon-footprint-form>
+<app-carbon-footprint-result></app-carbon-footprint-result>
+<h2>Liste des voyages</h2>
+<table>
+    <thead>
+        <tr>
+            <td>distanceKm</td>
+            <td>consommationPour100Km</td>            
+            <td>quantiteCO2</td>            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let voyage of voyages">
+            <td>{{voyage.distanceKm}}</td>
+            <td>{{voyage.consommationPour100Km|number:'1.2-2'}}</td>
+            <td>{{voyage.quantiteCO2}}</td>
+        </tr>
+    </tbody>
+</table>
+<button (click)="ajouterUnVoyage()">Ajouter un voyage</button>
